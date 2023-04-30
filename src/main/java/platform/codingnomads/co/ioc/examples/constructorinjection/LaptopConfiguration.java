@@ -17,4 +17,10 @@ public class LaptopConfiguration {
     public OS os() {
         return new OS("ubuntu");
     }
+
+    @Bean
+    public Keyboard keyboard(){
+        return new Keyboard("Logitech Keyboard");
+    }
+
 }
