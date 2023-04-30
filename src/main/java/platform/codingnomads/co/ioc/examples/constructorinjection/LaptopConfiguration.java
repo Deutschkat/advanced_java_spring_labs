@@ -21,6 +21,12 @@ public class LaptopConfiguration {
     @Bean
     public Keyboard keyboard(){
         return new Keyboard("Logitech Keyboard");
+
+    }
+
+    @Bean
+    public Mouse mouse(){
+        return new Mouse("Razer Mouse");
     }
 
 }
