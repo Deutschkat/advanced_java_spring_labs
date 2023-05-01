@@ -12,4 +12,9 @@ public class ConfigurationDemoConfig {
     public SampleClass sampleClass() {
         return new SampleClass();
     }
+
+    @Bean
+    public KatClass katBean(){
+        return new KatClass();
+    }
 }
