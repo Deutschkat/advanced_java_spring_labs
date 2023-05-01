@@ -18,5 +18,6 @@
         <property name="name" value="OpenJDK"/>
         <property name="version" value="11"/>
     </bean>
+    <bean id="gitTool" class="platform.codingnomads.co.corespring.examples.application_context.xml.GitTool" />
 
 </beans>
