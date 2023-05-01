@@ -6,6 +6,7 @@ public class BeanLifeCycleDemo {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(BeanLifeCycleConfig.class);
+        ctx.register(KatBeanNameAware.class);
         ctx.refresh();
         final SpringBean springBean = ctx.getBean(SpringBean.class);
         ctx.close();
