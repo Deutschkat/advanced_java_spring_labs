@@ -2,6 +2,7 @@ package platform.codingnomads.co.corespring.examples.springbeans;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Getter
@@ -11,7 +12,11 @@ public class SpringDeveloper {
 
     private Address address;
 
-    public SpringDeveloper(Address address) {
+    private Language language;
+
+    public SpringDeveloper(Address address, Language language) {
         this.address = address;
+        this.language = language;
+
     }
 }

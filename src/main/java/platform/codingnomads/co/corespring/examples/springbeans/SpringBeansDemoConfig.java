@@ -11,4 +11,16 @@ public class SpringBeansDemoConfig {
     public Address address() {
         return new Address("Main Street", 1500);
     }
+
+    @Bean
+    public Language language() {
+        return new Language("Java");
+    }
+
+    @Bean
+    public SpringDeveloper springDeveloper(Address address, Language language) {
+        return new SpringDeveloper(address, language);
+
+
+    }
 }
