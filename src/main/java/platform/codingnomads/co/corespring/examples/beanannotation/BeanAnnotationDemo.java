@@ -10,6 +10,7 @@ public class BeanAnnotationDemo {
         ctx.register(BeanAnnotationConfig.class);
         ctx.refresh();
         SampleBean sampleBean = ctx.getBean("friendly_bean_name", SampleBean.class);
+        SampleBean anotherSampleBean = ctx.getBean("casper_the_friendly_bean", SampleBean.class);
         ctx.close();
     }
 }
