@@ -7,9 +7,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ToString
-public class DesktopComputer {
+public class Desktop {
+
+    private final VideoCard videoCard;
 
     @Autowired
-    @Qualifier("radeon")
-    private VideoCard videoCard;
+    public Desktop(@Qualifier("radeon") VideoCard videoCard) {
+        this.videoCard = videoCard;
+    }
+
+    public VideoCard getVideoCard() {
+        return videoCard;
+    }
 }
+

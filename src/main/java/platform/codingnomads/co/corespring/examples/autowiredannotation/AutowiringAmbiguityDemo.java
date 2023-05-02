@@ -10,8 +10,14 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class AutowiringAmbiguityDemo {
 
+    private final Desktop desktopComputer;
+    private final Laptop laptopComputer;
+
     @Autowired
-    DesktopComputer desktopComputer;
+    public AutowiringAmbiguityDemo(Desktop desktopComputer, Laptop laptopComputer) {
+        this.desktopComputer = desktopComputer;
+        this.laptopComputer = laptopComputer;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(AutowiringAmbiguityDemo.class);
@@ -20,7 +26,18 @@ public class AutowiringAmbiguityDemo {
     @Bean
     public CommandLineRunner run() throws Exception {
         return args -> {
-            System.out.println(desktopComputer);
+            System.out.println("Desktop Computer: " + desktopComputer);
+            System.out.println("Laptop Computer Video Card: " + laptopComputer.getVideoCard());
         };
+    }
+
+    @Bean
+    public Desktop desktopComputer() {
+        return new Desktop(new Radeon());
+    }
+
+    @Bean
+    public Laptop laptopComputer() {
+        return new Laptop();
     }
 }
