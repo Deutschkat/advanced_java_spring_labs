@@ -12,12 +12,17 @@ public class ScopeAnnotationDemo {
         SingletonBean singletonBean1 = ctx.getBean(SingletonBean.class);
         SingletonBean singletonBean2 = ctx.getBean(SingletonBean.class);
 
+
         System.out.println("-----Hashcode of SingletonBean-----");
         System.out.println(singletonBean1.hashCode());
         System.out.println(singletonBean2.hashCode());
 
-        final PrototypeBean prototypeBean1 = ctx.getBean(PrototypeBean.class);
-        final PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
+
+        System.out.println("-----Creating PrototypeBean-----");
+        PrototypeBean prototypeBean1 = ctx.getBean(PrototypeBean.class);
+
+        System.out.println("-----Creating PrototypeBean-----");
+        PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
 
         System.out.println("-----Hashcode of PrototypeBean-----");
         System.out.println(prototypeBean1.hashCode());
