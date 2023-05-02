@@ -17,4 +17,11 @@ public class DependsOnDemoConfig {
     public JDK jdk() {
         return new JDK();
     }
+
+    @Bean
+    @DependsOn(value = "jdk")
+    public KatBean katBean(){
+        return new KatBean();
+    }
+
 }
