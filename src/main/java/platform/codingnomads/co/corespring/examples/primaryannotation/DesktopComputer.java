@@ -8,4 +8,17 @@ public class DesktopComputer {
 
     @Autowired
     private VideoCard videoCard;
+
+    private final DisplayDevice displayDevice;
+
+    @Autowired
+    public DesktopComputer(DisplayDevice displayDevice, VideoCard videoCard){
+        this.displayDevice = displayDevice;
+        this.videoCard= videoCard;
+    }
+
+    public void display(){
+        displayDevice.display();
+    }
+
 }
