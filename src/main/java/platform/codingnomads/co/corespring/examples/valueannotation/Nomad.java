@@ -36,8 +36,22 @@ public class Nomad {
     @Value("#{${database.values}}")
     private Map<String, String> databaseValues;
 
+    @Value("${nomad.favoriteColor}")
+    private String favoriteColor;
+
+    @Value("${nomad.favoriteFood}")
+    private String favoriteFood;
+
+    public String getFavoriteColor() {
+        return favoriteColor;
+    }
+
+    public String getFavoriteFood() {
+        return favoriteFood;
+    }
+
     public String nomadIdentity() {
-        return name.concat(" ").concat(age.toString());
+        return "Name: " + name.concat("\nAge: ").concat(age.toString());
     }
 
     public String getGreeting() {

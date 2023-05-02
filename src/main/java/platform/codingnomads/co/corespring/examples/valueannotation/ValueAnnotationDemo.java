@@ -16,6 +16,8 @@ public class ValueAnnotationDemo {
         nomad.getWorkingDays().forEach(System.out::println);
         System.out.println(nomad.getDatabaseValues());
         System.out.println(nomad.nomadIdentity());
+        System.out.println("Favorite Color: " + nomad.getFavoriteColor());
+        System.out.println("Favorite Food: " + nomad.getFavoriteFood());
         ctx.close();
     }
 }
