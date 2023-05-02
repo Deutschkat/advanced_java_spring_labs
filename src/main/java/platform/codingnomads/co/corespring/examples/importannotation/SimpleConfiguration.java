@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SimpleConfiguration {
     @Bean
-    public SpringDeveloper springDeveloper() {
+    public SpringDeveloper newSpringDeveloper() {
         return new SpringDeveloper();
     }
 }

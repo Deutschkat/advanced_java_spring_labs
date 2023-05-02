@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = SpringDeveloper.class)
+@ComponentScan(basePackageClasses = KatBean.class)
 public class SpringBeansDemoConfig {
     @Bean
     public Address address() {
@@ -18,8 +18,8 @@ public class SpringBeansDemoConfig {
     }
 
     @Bean
-    public SpringDeveloper springDeveloper(Address address, Language language) {
-        return new SpringDeveloper(address, language);
+    public KatBean springDeveloper(Address address, Language language) {
+        return new KatBean();
 
 
     }

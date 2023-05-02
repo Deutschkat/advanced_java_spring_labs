@@ -10,7 +10,7 @@ public class SpringBeansDemo {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringBeansDemoConfig.class);
-        SpringDeveloper springDeveloper = ctx.getBean(SpringDeveloper.class);
+        KatBean springDeveloper = ctx.getBean(KatBean.class);
         System.out.println("Spring Developer Address: " + springDeveloper.getAddress().getStreetNumber() + " " +
                 springDeveloper.getAddress().getStreet());
         System.out.println("Programming Language: " + springDeveloper.getLanguage().getName());
