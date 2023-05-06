@@ -31,6 +31,14 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
             //nothing
         }
 
+        try {
+            jdbcTemplate.execute("CREATE TABLE job_position (id BIGINT AUTO_INCREMENT PRIMARY KEY," +
+                    "position_title VARCHAR(255) NOT NULL,position_department VARCHAR(255) NOT NULL);");
+        } catch (Exception e) {
+
+        }
+
+
         //create a list of first and last names
         List<Object[]> splitUpNames = Stream.of("Java Ninja", "Spring Guru", "Java Guru", "Spring Ninja")
                 .map(name -> name.split(" "))
@@ -49,9 +57,44 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
                 //print each found employee to the console
                 .forEach(employee -> System.out.println(employee.toString()));
 
+
         //truncate the table
         jdbcTemplate.execute("TRUNCATE TABLE employees;");
         //delete the table
         jdbcTemplate.execute("DROP TABLE employees");
+
+
+        //create job positions
+
+        List<JobPosition> jobPositions = Stream.of(
+                new JobPosition(1,"Software Dev", "Engineering"),
+                new JobPosition(2,"HR Director", "Human Resources"),
+                new JobPosition(3, "Graphic Design Lead", "Marketing")
+        ).collect(Collectors.toList());
+
+        for (JobPosition jobPosition : jobPositions) {
+            jdbcTemplate.update(
+                    "INSERT INTO job_position(id, position_title, position_department) VALUES (?,?,?)",
+                    jobPosition.getId(),
+                    jobPosition.getPositionTitle(),
+                    jobPosition.getPositionDepartment()
+            );
+        }
+
+
+        //query for job positions where engineering is department.
+
+        jdbcTemplate.query(
+                        "SELECT id, position_title, position_department FROM job_position WHERE position_department = 'Engineering'",
+                        (rs, rowNum) -> new JobPosition(rs.getLong("id"), rs.getString("position_title"), rs.getString("position_department"))
+                )
+                //print each found job position to the console
+                .forEach(jobPosition -> System.out.println(jobPosition.toString()));
+
+
+        //truncate the table
+        jdbcTemplate.execute("TRUNCATE TABLE job_position;");
+        //delete the table
+        jdbcTemplate.execute("DROP TABLE job_position");
     }
 }
