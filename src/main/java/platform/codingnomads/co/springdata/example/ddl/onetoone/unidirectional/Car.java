@@ -1,6 +1,7 @@
 package platform.codingnomads.co.springdata.example.ddl.onetoone.unidirectional;
 
 import lombok.*;
+import org.springframework.data.relational.core.sql.In;
 
 import javax.persistence.*;
 
@@ -20,5 +21,8 @@ public class Car {
 
     @Column(name = "horsepower")
     private String horsepower;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private Insurance insurance;
 
 }
