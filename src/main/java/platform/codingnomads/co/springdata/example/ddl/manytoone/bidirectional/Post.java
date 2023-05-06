@@ -22,7 +22,10 @@ public class Post {
     private String content;
 
     //this annotation references the configuration on the post field in the Comment class
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private Set<Comment> comments;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private Set<Attachment> attachments;
 
 }

@@ -1,6 +1,8 @@
-package platform.codingnomads.co.springdata.example.ddl.manytoone.bidirectional;
+package platform.codingnomads.co.springdata.example.ddl.manytoone.unidirectional.usingmanytoone;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -8,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comment {
+public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +20,10 @@ public class Comment {
     private String username;
 
     @Column(nullable = false)
-    private String content;
+    private int ratingScore;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
 
 }
