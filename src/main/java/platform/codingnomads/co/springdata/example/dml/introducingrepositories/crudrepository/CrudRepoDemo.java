@@ -26,9 +26,18 @@ public class CrudRepoDemo implements CommandLineRunner {
         User user = User.builder().firstName("Bobby").lastName("Bobbert").age(56).build();
         User user2 = User.builder().firstName("Joanne").lastName("Joanna").age(36).build();
 
+        User user3 = User.builder().firstName("Kat").lastName("Nix").age(30).build();
+        User user4 = User.builder().firstName("Pedro").lastName("Pascal").age(47).build();
+        User user5 = User.builder().firstName("Axel").lastName("McGregor").age(35).build();
+
+
+
         //save user and assign what is returned to the user variable.
         user = userRepo.save(user);
         user2 = userRepo.save(user2);
+        user3 = userRepo.save(user3);
+        user4 = userRepo.save(user4);
+        user5 = userRepo.save(user5);
 
         Iterable<User> users = userRepo.findAll();
 

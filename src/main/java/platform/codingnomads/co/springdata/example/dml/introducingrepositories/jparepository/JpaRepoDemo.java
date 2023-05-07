@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class JpaRepoDemo implements CommandLineRunner {
@@ -23,12 +24,20 @@ public class JpaRepoDemo implements CommandLineRunner {
         SoftDrink fanta = SoftDrink.builder().name("Fanta").rating(10).build();
         SoftDrink coke = SoftDrink.builder().name("Coca-Cola").rating(4).build();
         SoftDrink drPepper = SoftDrink.builder().name("Dr. Pepper").rating(1).build();
+        SoftDrink sprite = SoftDrink.builder().name("Sprite").rating(8).build();
+        SoftDrink rootBeer = SoftDrink.builder().name("Root Beer").rating(10).build();
+        SoftDrink canadaDry = SoftDrink.builder().name("Canada Dry").rating(5).build();
+        SoftDrink crush = SoftDrink.builder().name("Crush").rating(7).build();
 
         //save single entity instance
         fanta = softDrinkRepo.save(fanta);
+        sprite = softDrinkRepo.save(sprite);
+        rootBeer = softDrinkRepo.save(rootBeer);
+
 
         //save multiple entity instances at a time
         List<SoftDrink> insertedSoftDrinks = softDrinkRepo.saveAll(List.of(coke, drPepper));
+        List<SoftDrink> insertedSoftDrinks2 = softDrinkRepo.saveAll(List.of(canadaDry, crush));
 
         //make sure all entities are actually saved to the database
         softDrinkRepo.flush();
@@ -39,9 +48,16 @@ public class JpaRepoDemo implements CommandLineRunner {
             softDrinkRepo.save(sd);
         }
 
+        for (SoftDrink sd2 : insertedSoftDrinks2) {
+            sd2.setRating(8);
+            softDrinkRepo.save(sd2);
+        }
+
         System.out.println("ALL SOFT DRINKS IN DESCENDING ORDER BASED ON ID");
         //get all soft drinks in ascending order and print toString() to the console
         softDrinkRepo.findAll(Sort.by(Sort.Direction.DESC, "id")).forEach(System.out::println);
+
+        Optional<SoftDrink> foundSoftDrink = softDrinkRepo.findById(sprite.getId());
 
         //find all using an example
         System.out.println("FINDING ALL USING EXAMPLE");
