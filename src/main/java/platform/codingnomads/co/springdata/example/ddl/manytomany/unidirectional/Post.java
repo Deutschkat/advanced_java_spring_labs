@@ -32,7 +32,11 @@ public class Post {
     )
     private Set<Comment> comments;
 
-    //set up many-to-many relationship with the tag class
+    //set up many-to-many relationship with the Location class
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Location> location;
+    private Set<Location> locations;
+
+    // set up many-to-many relationship with the Role class
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Role> roles;
 }
