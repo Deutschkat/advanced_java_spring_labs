@@ -71,19 +71,19 @@ public class UserService {
     public void idError() {
         //build an Address
         Address address1 = Address.builder()
-                .street("A street name and a house number")
-                .city("The name of a city")
-                .postcode("00000")
-                .state("The name of a State/Province")
-                .country("The name of a country")
+                .street("1809 Elm Street")
+                .city("Chicago")
+                .postcode("84739")
+                .state("Illinois")
+                .country("USA")
                 .build();
 
         //build a ContactCard
-        ContactCard contactCard1 = ContactCard.builder().emailAddress("an email address").build();
+        ContactCard contactCard1 = ContactCard.builder().emailAddress("abc@gmail.com").build();
 
         //build a User
         User user1 = User.builder()
-                .username("a username")
+                .username("Pascalispunk")
                 .contactCard(contactCard1)
                 .address(address1)
                 .build();
@@ -95,23 +95,22 @@ public class UserService {
 
         //build a second Address
         Address address2 = Address.builder()
-                .street("Street 36")
-                .city("City of City")
-                .postcode("95732")
-                .state("State of Disarray")
-                .country("United States of Disarray")
+                .street("127 N. Oak Drive")
+                .city("Guthrie")
+                .postcode("76507")
+                .state("Oklahoma")
+                .country("USA")
                 .build();
 
         //build a second contact card
         ContactCard contactCard2 = ContactCard.builder()
-                .emailAddress("pleasedontsendmeemails@nothanks.com")
+                .emailAddress("idonthaveemail@gmail.com")
                 .build();
 
         //build a second User with an ID already assigned
         User user2 = User.builder()
                 //note that unlike user1, user2 is assigned ID 1
-                .id(1L)
-                .username("a_username")
+                .username("NotoriousKAT")
                 .contactCard(contactCard2)
                 .address(address2)
                 .build();

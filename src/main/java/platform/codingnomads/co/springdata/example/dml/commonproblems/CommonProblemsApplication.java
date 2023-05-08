@@ -13,13 +13,13 @@ public class CommonProblemsApplication implements CommandLineRunner {
     UserService userService;
 
     public static void main(String[] args) {
-        SpringApplication.run(CommonProblemsApplication.class);
+        SpringApplication.run(CommonProblemsApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
         userService.idError();
-//        userService.persistAFewUsers();
-//        userService.querySomeData();
+        userService.persistAFewUsers();
+        userService.querySomeData();
     }
 }
