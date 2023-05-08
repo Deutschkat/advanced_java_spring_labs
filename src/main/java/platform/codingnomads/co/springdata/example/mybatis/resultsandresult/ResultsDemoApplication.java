@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+
 @SpringBootApplication
 public class ResultsDemoApplication {
 
@@ -13,7 +15,7 @@ public class ResultsDemoApplication {
     }
 
     @Bean
-    public CommandLineRunner loadInitialData(SongMapper songMapper) {
+    public CommandLineRunner loadInitialData(SongMapper songMapper, AlbumMapper albumMapper) {
         return (args) -> {
             //notice the setter names have changed to match Java naming conventions
             Song song1 = new Song();
@@ -31,8 +33,43 @@ public class ResultsDemoApplication {
             songMapper.insertNewSong(song1);
             songMapper.insertNewSong(song2);
 
+
             Song song3 = songMapper.getSongById(1L);
             System.out.println(song3.toString());
+
+            System.out.println("My stuff is here: ");
+            System.out.println();
+
+            Album album1 = new Album("Zeit", "Rammstein", 2021);
+            Album album2 = new Album("Costello Music", "The Fratellis", 2006);
+
+            albumMapper.insertNewAlbum(album1);
+            albumMapper.insertNewAlbum(album2);
+
+
+            //1
+            ArrayList<Album> getAlbumsByName = albumMapper.getAlbumsByName("Zeit");
+            getAlbumsByName.forEach(System.out::println);
+
+            System.out.println();
+
+            //2
+
+            ArrayList<Album> getAlbumByArtist = albumMapper.getAlbumsByArtist("The Fratellis");
+            getAlbumByArtist.forEach(System.out::println);
+
+            System.out.println();
+
+            //3
+            albumMapper.deleteAlbumById(album2.getId());
+
+            //4
+            ArrayList<Album> updateAlbum = albumMapper.updateAlbum(album2);
+            updateAlbum.forEach(System.out::println);
+
+
+
+
         };
     }
 }
