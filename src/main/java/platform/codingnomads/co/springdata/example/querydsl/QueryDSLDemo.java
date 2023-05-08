@@ -7,10 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.Transactional;
-import platform.codingnomads.co.springdata.example.querydsl.models.Area;
-import platform.codingnomads.co.springdata.example.querydsl.models.QArea;
-import platform.codingnomads.co.springdata.example.querydsl.models.Route;
-import platform.codingnomads.co.springdata.example.querydsl.models.SearchQuery;
+import platform.codingnomads.co.springdata.example.querydsl.models.*;
 import platform.codingnomads.co.springdata.example.querydsl.repository.AreaRepository;
 import platform.codingnomads.co.springdata.example.querydsl.repository.RouteRepository;
 
@@ -73,6 +70,38 @@ public class QueryDSLDemo implements CommandLineRunner {
                 .where(qArea.code.eq("A"))
                 .fetchOne();
         System.out.println(area);
+
+
+
+        //My code
+        System.out.println("My Code Here: ");
+
+        System.out.println("Query 1: Retrieve all areas");
+        JPAQuery<Area> areaQuery = new JPAQuery<>(entityManager);
+        List<Area> areas1 = areaQuery.select(QArea.area).from(QArea.area).fetch();
+        areas1.forEach(System.out::println);
+
+        System.out.println();
+
+        System.out.println("Query 2: Retrieve all routes");
+        JPAQuery<Route> routeQuery = new JPAQuery<>(entityManager);
+        List<Route> routes2 = routeQuery.select(QRoute.route).from(QRoute.route).fetch();
+        routes2.forEach(System.out::println);
+
+        System.out.println();
+
+        System.out.println("Query 3: Retrieve all routes by origin area code and destination area code");
+        SearchQuery searchQuery = SearchQuery.builder()
+                .origin("CODE1")
+                .destination("CODE2")
+                .build();
+        List<Route> routesByOriginAndDestination = routeRepository.findAllRoutesBySearchQuery(searchQuery);
+        routesByOriginAndDestination.forEach(System.out::println);
+
+        System.out.println();
+        System.out.println("Done with my code.");
+
+
 
         routeRepository.deleteAll();
         areaRepository.deleteAll();
