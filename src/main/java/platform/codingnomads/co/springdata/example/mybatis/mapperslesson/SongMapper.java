@@ -18,6 +18,18 @@ public interface SongMapper {
             "WHERE id = #{param1};")
     Song getSongById(Long id);
 
+    //one of my new methods
+    @Update("UPDATE mybatis.songs " +
+            "SET album_name = #{album_name} " +
+            "WHERE name = #{name};")
+    void updateAlbumNameByName(String name, String album_name);
+
+    //second new method
+    @Delete("DELETE FROM mybatis.songs " +
+            "WHERE name = #{name};")
+    void deleteSongByName(String name);
+
+
     @Select("SELECT * " +
             "FROM mybatis.songs " +
             "WHERE name = #{param1};")
