@@ -92,11 +92,30 @@ public class QueryDSLDemo implements CommandLineRunner {
 
         System.out.println("Query 3: Retrieve all routes by origin area code and destination area code");
         SearchQuery searchQuery = SearchQuery.builder()
-                .origin("CODE1")
-                .destination("CODE2")
+                .origin("CODE_1")
+                .destination("CODE_2")
                 .build();
         List<Route> routesByOriginAndDestination = routeRepository.findAllRoutesBySearchQuery(searchQuery);
         routesByOriginAndDestination.forEach(System.out::println);
+
+        System.out.println("Query 4: Retrieve all areas whose name contains 'CertainString'");
+        String searchString = "CertainString";
+        JPAQuery<Area> areaQueryWithSearch = new JPAQuery<>(entityManager);
+        List<Area> areasWithSearch = areaQueryWithSearch.select(QArea.area)
+                .from(QArea.area)
+                .where(QArea.area.name.containsIgnoreCase(searchString))
+                .fetch();
+        areasWithSearch.forEach(System.out::println);
+
+
+        System.out.println("Query 5: Retrieve all routes with destination area code 'CODE2'");
+        String destinationCode = "CODE_2";
+        JPAQuery<Route> routeQueryWithDestinationCode = new JPAQuery<>(entityManager);
+        List<Route> routesWithDestinationCode = routeQueryWithDestinationCode.select(QRoute.route)
+                .from(QRoute.route)
+                .where(QRoute.route.destination.code.eq(destinationCode))
+                .fetch();
+        routesWithDestinationCode.forEach(System.out::println);
 
         System.out.println();
         System.out.println("Done with my code.");
