@@ -39,4 +39,11 @@ public class Route implements Serializable {
             foreignKey = @ForeignKey(name = "fk_routes_destination_area_id")
     )
     private Area destination;
+
+    @PrePersist
+    public void generateCode() {
+        if (origin != null && destination != null) {
+            this.code = origin.getCode() + "-" + destination.getCode();
+        }
+    }
 }
