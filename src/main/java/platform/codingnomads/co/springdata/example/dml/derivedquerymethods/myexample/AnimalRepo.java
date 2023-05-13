@@ -10,13 +10,13 @@ public interface AnimalRepo extends JpaRepository<Animal, Long> {
 
     List<Animal> findByGenus(String genus);
 
-    List<Animal> findByAnimalDietClassification(String classification);
+    List<Animal> findByAnimalDietClassification(String dietClassification);
 
-    List<Animal> findByAnimalDietClassificationAndGenus(String classification, String genus);
+    List<Animal> findByAnimalDietClassificationAndGenus(String dietClassification, String genus);
 
     List<Animal> findByAnimalDietId(Long dietId);
 
-    List<Animal> findByName(String name);
+    List<Animal> findByAnimalName(String animalName);
 
     List<Animal> findByAnimalDietIsVegetarianTrue();
 

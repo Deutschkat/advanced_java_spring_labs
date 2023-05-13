@@ -2,28 +2,27 @@ package platform.codingnomads.co.springdata.example.mybatis.oneandmany.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
-@ToString
-public class Song {
+public class Album {
 
     private Long id;
 
     private String name;
 
-    private Album album;
+    private String year;
 
     private Artist artist;
 
-    //song length in seconds
-    private int songLength;
+    private List<Song> songs;
 
-    public Song(String name, Album album, Artist artist, int songLength) {
+    public Album(String name, String year, Artist artist, List<Song> songs) {
         this.name = name;
-        this.album = album;
+        this.year = year;
         this.artist = artist;
-        this.songLength = songLength;
+        this.songs = songs;
     }
 }

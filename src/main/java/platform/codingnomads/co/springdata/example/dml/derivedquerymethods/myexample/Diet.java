@@ -20,7 +20,7 @@ public class Diet {
     private Long id;
 
     @Column
-    private String classification;
+    private String dietClassification;
 
     @Column(nullable = false, unique = true)
     private String dietDescription;

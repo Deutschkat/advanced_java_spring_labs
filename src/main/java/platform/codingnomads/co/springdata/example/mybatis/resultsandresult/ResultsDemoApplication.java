@@ -60,6 +60,7 @@ public class ResultsDemoApplication {
 
             System.out.println();
 
+
             //3
             albumMapper.deleteAlbumById(album2.getId());
 

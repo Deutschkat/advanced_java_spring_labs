@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 @Mapper
 public interface ArtistMapper {
-
     @Insert("INSERT INTO mybatis.artists (name, bio) VALUES (#{name}, #{bio});")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void insertNewArtist(Artist artist);
@@ -16,18 +15,12 @@ public interface ArtistMapper {
     @Select("SELECT * FROM mybatis.artists WHERE id = #{param1};")
     @Results({
             @Result(property = "id", column = "id"),
-            @Result(
-                    property = "songs",
-                    column = "id",
+            @Result(property = "albums", column = "id",
                     javaType = ArrayList.class,
-                    many = @Many(
-                            select = "platform.codingnomads.co.springdata.example.mybatis.oneandmany.mappers.SongMapper.getSongsByArtistId",
-                            fetchType = FetchType.LAZY
-                    )
-            )
+                    many = @Many(select = "platform.codingnomads.co.springdata.example.mybatis.oneandmany.mappers.AlbumMapper.getAlbumsByArtistId"))
     })
-    Artist getArtistByIdWithSongs(Long id);
+    Artist getArtistByIdWithAlbums(Long id);
 
     @Select("SELECT * FROM mybatis.artists WHERE id = #{param1};")
-    Artist getArtistByIdWithoutSongs(Long id);
+    Artist getArtistByIdWithoutAlbums(Long id);
 }

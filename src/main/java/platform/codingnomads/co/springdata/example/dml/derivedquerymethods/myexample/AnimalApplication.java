@@ -19,9 +19,9 @@ public class AnimalApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception{
-        Diet carnivore = Diet.builder().classification("carnivore").isVegetarian(false).dietDescription("meat and fish").build();
-        Diet omnivore = Diet.builder().classification("omnivore").isVegetarian(false).dietDescription("vegetation, fruits, and meat").build();
-        Diet herbivore = Diet.builder().classification("herbivore").isVegetarian(true).dietDescription("plants and/or vegetation").build();
+        Diet carnivore = Diet.builder().dietClassification("carnivore").isVegetarian(false).dietDescription("meat and fish").build();
+        Diet omnivore = Diet.builder().dietClassification("omnivore").isVegetarian(false).dietDescription("vegetation, fruits, and meat").build();
+        Diet herbivore = Diet.builder().dietClassification("herbivore").isVegetarian(true).dietDescription("plants and/or vegetation").build();
 
         Animal lion = Animal.builder()
                 .animalName("Lion")
@@ -65,7 +65,7 @@ public class AnimalApplication implements CommandLineRunner {
         animals3.forEach(System.out::println);
 
         System.out.println("\n *******       *******");
-        List<Animal> animals4 = animalRepo.findByName("White Rhinoceros");
+        List<Animal> animals4 = animalRepo.findByAnimalName("White Rhinoceros");
         animals4.forEach(System.out::println);
 
 
