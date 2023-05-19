@@ -29,13 +29,14 @@ public class GetForObjectDemo {
             randomQuote = restTemplate.getForObject("https://zenquotes.io/api/random/", QuoteTemplate[].class);
             System.out.println(Arrays.toString(randomQuote));
 
-            // submit more requests here
-            
-//            CodingNomadsTasksApiResponse response =
-//                    restTemplate.getForObject("http://demo.codingnomads.co:8080/tasks_api/users/5",
-//                            CodingNomadsTasksApiResponse.class);
-//
-//            System.out.println(response.toString());
+
+            ExcuseTemplate[] randomExcuse;
+            randomExcuse = restTemplate.getForObject("https://excuser-three.vercel.app/v1/excuse", ExcuseTemplate[].class);
+            System.out.println(Arrays.toString(randomExcuse));
+
+            ExcuseTemplate[] multipleExcuses;
+            multipleExcuses = restTemplate.getForObject("https://excuser-three.vercel.app/v1/excuse/college/4", ExcuseTemplate[].class);
+            System.out.println(Arrays.toString(multipleExcuses));
 
         };
     }
