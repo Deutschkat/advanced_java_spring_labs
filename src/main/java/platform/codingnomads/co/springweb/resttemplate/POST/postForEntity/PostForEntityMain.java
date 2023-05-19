@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import platform.codingnomads.co.springweb.resttemplate.POST.models.ResponseObject;
 import platform.codingnomads.co.springweb.resttemplate.POST.models.Task;
+import platform.codingnomads.co.springweb.resttemplate.POST.postForObject.ResponseObjectUser;
+import platform.codingnomads.co.springweb.resttemplate.POST.postForObject.User;
 
 import java.util.Objects;
 
@@ -26,21 +28,25 @@ public class PostForEntityMain {
     @Bean
     public CommandLineRunner run() throws Exception {
         return args -> {
-            Task newTask = Task.builder()
-                    .name("learn how to use postForEntity()")
-                    .description("get comfortable using the RestTemplate postForEntity() method")
-                    //be sure to use valid user id
-                    .userId(380)
-                    .completed(false)
+
+            User newUser = User.builder()
+                    .id(801)
+                    .email("princeofdarkness@gmail.com")
+                    .first_name("Ozzy")
+                    .last_name("Osbourne")
+                    .created_at("2023-05-19T20:59:38.974")
+                    .updated_at("2023-05-19T20:59:38.974")
                     .build();
 
-            ResponseEntity<ResponseObject> responseEntity = restTemplate
-                    .postForEntity("http://demo.codingnomads.co:8080/tasks_api/tasks", newTask, ResponseObject.class);
+            ResponseEntity<ResponseObjectUser> responseEntity2 = restTemplate
+                    .postForEntity("http://demo.codingnomads.co:8080/tasks_api/users", newUser, ResponseObjectUser.class);
 
-            if (responseEntity.getStatusCode().equals(HttpStatus.CREATED)) {
-                System.out.println(Objects.requireNonNull(responseEntity.getBody()));
+            if (responseEntity2.getStatusCode().equals(HttpStatus.CREATED)) {
+                System.out.println(Objects.requireNonNull(responseEntity2.getBody()));
             } else {
-                System.out.println(Objects.requireNonNull(responseEntity.getBody()).getError());
+                System.out.println(Objects.requireNonNull(responseEntity2.getBody()).getError());
+
+
             }
         };
     }
