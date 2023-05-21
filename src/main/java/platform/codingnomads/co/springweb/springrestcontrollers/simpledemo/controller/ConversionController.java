@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(path = "/api")
 public class ConversionController {
 
     private final String text = "this is the text that this is all based on.";
@@ -25,4 +26,11 @@ public class ConversionController {
     public String returnTheString() {
         return text;
     }
+
+    @RequestMapping(path = "/backwards", method = RequestMethod.GET)
+    public String returnBackwards() {
+        StringBuilder reversedText = new StringBuilder(text).reverse();
+        return reversedText.toString();
+    }
+
 }
