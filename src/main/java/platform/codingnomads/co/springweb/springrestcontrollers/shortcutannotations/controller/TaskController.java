@@ -58,4 +58,18 @@ public class TaskController {
         taskRepository.deleteById(id);
         return ResponseEntity.ok().body(id);
     }
+
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task updatedTask){
+        Task taskToUpdate = taskRepository.findById(id).orElse(null);
+
+        if (taskToUpdate == null){
+            return ResponseEntity.notFound().build();
+        }
+        taskToUpdate.setName(updatedTask.getName());
+
+        Task savedTask = taskRepository.save(taskToUpdate);
+        return ResponseEntity.ok(savedTask);
+    }
+
 }
