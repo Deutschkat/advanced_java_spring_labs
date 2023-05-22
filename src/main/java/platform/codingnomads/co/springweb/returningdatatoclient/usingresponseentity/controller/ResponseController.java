@@ -38,4 +38,18 @@ public class ResponseController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @GetMapping("/practice")
+    public ResponseEntity<?> practiceMethod(){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Custom", "Custom");
+        String text = "This is a custom response with headers and a body.";
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(text);
+
+
+    }
+
 }
