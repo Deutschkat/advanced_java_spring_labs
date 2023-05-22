@@ -44,4 +44,22 @@ public class TaskController {
                 .mapToObj(i -> Task.builder().id((long) i).name(names.get(i)).build())
                 .collect(Collectors.toList());
     }
+
+
+    @GetMapping(value = "/findByName", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTaskByName(@RequestParam String name) {
+        // Dummy code as placeholder for actual logic
+        return "Task name: " + name;
+    }
+
+    @GetMapping(value = "/findByStatus", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTaskByStatus(@RequestParam Boolean status) {
+        return "Task status: " + (status ? "completed" : "not completed");
+    }
+
+    @GetMapping(value = "/findByDate", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getTaskByDate(@RequestParam String date) {
+        return "Tasks created at: " + date;
+    }
 }
+
