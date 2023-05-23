@@ -16,6 +16,8 @@ import platform.codingnomads.co.springweb.gettingdatafromclient.handlingmultipar
 
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -26,8 +28,7 @@ public class HandleMultipartDataController {
     @Autowired
     DatabaseFileRepository fileRepository;
 
-    //@PostMapping("/uploadSingleFile")
-    @PostMapping()
+    @PostMapping("/uploadSingleFile")
     public ResponseEntity<?> uploadFile(@RequestBody MultipartFile file) {
 
         String fileName;
@@ -71,8 +72,7 @@ public class HandleMultipartDataController {
         }
     }
 
-    //@GetMapping("/download/{id}")
-    @GetMapping("/{id}")
+    @GetMapping("/download/{id}")
     public ResponseEntity<?> downloadFileById(@PathVariable(name = "id") Long fileId) {
 
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
@@ -95,8 +95,7 @@ public class HandleMultipartDataController {
                 .body(new ByteArrayResource(databaseFile.getData()));
     }
 
-    //@PutMapping("/uploadSingleFile/{id}")
-    @PutMapping("/{id}")
+    @PutMapping("/uploadSingleFile/{id}")
     public ResponseEntity<?> updateFileById(@PathVariable(name = "id") Long fileId, @RequestBody MultipartFile file) {
 
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
@@ -136,8 +135,7 @@ public class HandleMultipartDataController {
                 .build());
     }
 
-    //@DeleteMapping("/deleteFile/{id}")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteFile/{id}")
     public ResponseEntity<?> deleteFileById(@PathVariable("id") Long fileId) {
         final Optional<DatabaseFile> optional = fileRepository.findById(fileId);
 
@@ -148,6 +146,23 @@ public class HandleMultipartDataController {
 
         fileRepository.deleteById(fileId);
         return ResponseEntity.ok("File with ID " + fileId + " and name " + optional.get().getFileName() + " was deleted");
+    }
+
+    @GetMapping("/search")
+    public List<FileResponse> searchFilesByName(@RequestParam("name") String searchTerm) {
+        List<DatabaseFile> databaseFiles = fileRepository.findByFileNameContaining(searchTerm);
+
+        List<FileResponse> fileResponses = new ArrayList<>();
+        for (DatabaseFile databaseFile : databaseFiles) {
+            fileResponses.add(FileResponse.builder()
+                    .fileName(databaseFile.getFileName())
+                    .fileDownloadUri(databaseFile.getDownloadUrl())
+                    .fileType(databaseFile.getFileType())
+                    .size(databaseFile.getData().length)
+                    .build());
+        }
+
+        return fileResponses;
     }
 }
 
