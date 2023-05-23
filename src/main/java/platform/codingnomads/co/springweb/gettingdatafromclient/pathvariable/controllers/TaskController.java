@@ -48,5 +48,23 @@ public class TaskController {
     public String pathVariableIsNotEncoded(@PathVariable String name) {
         return name;
     }
+
+
+    @GetMapping(value = "/{id}")
+    public String getTaskById(@PathVariable(name = "id") Long id) {
+        return "Task ID: " + id;
+    }
+
+    @GetMapping(value = "/{name}")
+    public String getTaskByName(@PathVariable(name = "name") String name) {
+        return "Task name: " + name;
+    }
+
+    @GetMapping(value = "/status/{completed}")
+    public String getTaskByStatus(@PathVariable(name = "completed") Boolean completed) {
+        return "Task status: " + (completed ? "completed" : "not completed");
+    }
+
+
 }
 
