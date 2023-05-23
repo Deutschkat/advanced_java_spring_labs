@@ -48,4 +48,15 @@ public class TaskController {
             return ResponseEntity.ok().body(message);
         }
     }
+
+    @PostMapping(value = "/message")
+    public ResponseEntity<String> messageMethod(@RequestBody(required = true) String message) {
+        return ResponseEntity.ok().body("You sent the message: " + message);
+    }
+
+    @PostMapping(value = "/count")
+    public ResponseEntity<String> countMethod(@RequestBody(required = true) String text) {
+        int length = text.length();
+        return ResponseEntity.ok().body("The text you sent contains " + length + " characters.");
+    }
 }
