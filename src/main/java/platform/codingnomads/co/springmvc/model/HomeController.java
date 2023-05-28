@@ -15,9 +15,15 @@ public class HomeController {
     // using addAttribute for each attribute
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("name", "Developer");
+        model.addAttribute("name", "Kat");
         model.addAttribute("language", "Java");
         model.addAttribute("framework", "Spring");
+
+        model.addAttribute("version", 11);
+        model.addAttribute("OS", "Windows");
+        model.addAttribute("IDE", "IntelliJ");
+        model.addAttribute("database", "MySQL");
+
         return "model-page";
     }
 
