@@ -22,31 +22,48 @@ public class TestingWebServices {
 
     @Test
     public void helloShouldReturnDefaultMessage() throws Exception {
-        //use mockMvc to start a request
         mockMvc
-                //.perform is used to indicate what mockMvc should do
-                .perform(
-                        //the get method and the path passed in as a parameter is used to indicate the
-                        // HTTP method and the url path used to make request
-                        get("/hello"))
-                //print the response
+                .perform(get("/hello"))
                 .andDo(print())
-                //the response should have status 200 OK
                 .andExpect(status().isOk())
-                //test that this response has a body that contains a "Hello Back" String
                 .andExpect(content().string(containsString("Hello Back")));
-
     }
 
     @Test
     public void baseURLShouldReturnGreetingViewName() throws Exception {
-        //use mockMvc to start a request
         mockMvc
-                //indicate what HTTP method and url path should be used to make the request
                 .perform(get("/"))
-                //the result should be printed
                 .andDo(print())
-                //the view name expected is greeting
-                .andExpect(view().name("greeting"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("greeting"))
+                .andExpect(model().attribute("name", "Bobbert"));
+    }
+
+    @Test
+    public void notFoundShouldReturn404() throws Exception {
+        mockMvc
+                .perform(get("/not-found"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void profileShouldReturnCorrectViewAndModel() throws Exception {
+        mockMvc
+                .perform(get("/profile"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("profile"))
+                .andExpect(model().attribute("name", "Ozzy"))
+                .andExpect(model().attribute("age", 70));
+    }
+
+    @Test
+    public void redirectShouldRedirectToHello() throws Exception {
+        mockMvc
+                .perform(get("/redirect"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/hello"));
     }
 }
