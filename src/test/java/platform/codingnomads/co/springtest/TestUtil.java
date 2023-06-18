@@ -1,9 +1,11 @@
 package platform.codingnomads.co.springtest;
 
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
 import java.io.IOException;
+import java.util.List;
 
 public class TestUtil {
 
@@ -29,5 +31,11 @@ public class TestUtil {
 
         //read the byte array containing the JSON and translate it into an object.
         return reader.readValue(bytes);
+    }
+
+    public static <T> List<T> convertJsonBytesToList(byte[] bytes, Class<T> clazz) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
+        return mapper.readValue(bytes, type);
     }
 }

@@ -25,8 +25,8 @@ public class SpringTestLab implements CommandLineRunner {
     public void run(String... args) {
         if (movieRepository.findAll().isEmpty()) {
             movieRepository.saveAll(Arrays.asList(
-                    Movie.builder().name("The Shawshank Redemption").rating(9.3).build(),
-                    Movie.builder().name("The Pursuit of Happyness").rating(8.0).build()
+                    Movie.builder().name("Sweeney Todd: The Demon Barber of Fleet Street").rating(9.5).build(),
+                    Movie.builder().name("Doomstar Requiem").rating(8.0).build()
             ));
         }
     }
