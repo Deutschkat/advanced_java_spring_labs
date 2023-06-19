@@ -66,14 +66,14 @@ public class SecurityConfig {
 //        users.setUsersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?");
 //        return users;
 //    }
-//
-//    @Bean
-//    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-//        Authority userAuth = Authority.builder().authority(RoleEnum.ROLE_USER).build();
-//        UserPrincipal user1 = new UserPrincipal("USER1", passwordEncoder()
-//                .encode("hi"), Collections.singletonList(userAuth));
-//        UserPrincipal user2 = new UserPrincipal("USER2", passwordEncoder()
-//                .encode("hello"), Collections.singletonList(userAuth));
-//        return new InMemoryUserDetailsManager(user1, user2);
-//    }
+
+    @Bean
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+        Authority userAuth = Authority.builder().authority(RoleEnum.ROLE_USER).build();
+        UserPrincipal user1 = new UserPrincipal("USER1", passwordEncoder()
+                .encode("hi"), Collections.singletonList(userAuth));
+        UserPrincipal user2 = new UserPrincipal("USER2", passwordEncoder()
+                .encode("hello"), Collections.singletonList(userAuth));
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
 }

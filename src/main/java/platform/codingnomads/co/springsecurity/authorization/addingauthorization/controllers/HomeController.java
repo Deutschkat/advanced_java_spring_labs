@@ -28,6 +28,26 @@ public class HomeController {
         return "authorization/home";
     }
 
+
+    @GetMapping("/superuDashboard")
+    @PreAuthorize("hasRole('SUPERU')")
+    public String superuDashboard() {
+        return "authorization/superuDashboard";
+    }
+
+    @GetMapping("/superuSettings")
+    @PreAuthorize("hasRole('SUPERU')")
+    public String superuSettings() {
+        return "authorization/superuSettings";
+    }
+
+    @GetMapping("/superuProfile")
+    @PreAuthorize("hasRole('SUPERU')")
+    public String superuProfile() {
+        return "authorization/superuProfile";
+    }
+
+
     /*
         Method Security Annotations
 
