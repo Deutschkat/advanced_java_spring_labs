@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{authorization/fragments/layout}">
+<head>
+  <title>Superuser Profile</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+  <h1>Superuser Profile Page</h1>
+  <p>This page is only accessible to (and able to be seen by) super users. Here, you can view and edit your profile.</p>
+</div>
+</body>
+</html>

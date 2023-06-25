@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 <th:block th:fragment="header">
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -21,9 +21,10 @@
                         <a th:href="@{/superu}">/superu</a>
                     </li>
 
-                    <li><a th:href="@{/superuDashboard}">Superuser Dashboard</a></li>
-                    <li><a th:href="@{/superuSettings}">Superuser Settings</a></li>
-                    <li><a th:href="@{/superuProfile}">Superuser Profile</a></li>
+                    <!-- These links are only visible to superusers -->
+                    <li sec:authorize="hasRole('SUPERU')"><a th:href="@{/superuDashboard}">Superuser Dashboard</a></li>
+                    <li sec:authorize="hasRole('SUPERU')"><a th:href="@{/superuSettings}">Superuser Settings</a></li>
+                    <li sec:authorize="hasRole('SUPERU')"><a th:href="@{/superuProfile}">Superuser Profile</a></li>
                 </ul>
             </div>
         </div>

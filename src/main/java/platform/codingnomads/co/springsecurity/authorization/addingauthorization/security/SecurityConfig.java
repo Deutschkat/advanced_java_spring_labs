@@ -29,7 +29,10 @@ public class SecurityConfig {
                     //only allow users with an UPDATER authority to update users.
                     .antMatchers("/update-user").hasAuthority("UPDATER")
                     //make sure that all others requests require authentication.
-                    .anyRequest().authenticated())
+                        .antMatchers("/superuSettings").hasRole("SUPERU")
+                        .antMatchers("/superuDashboard").hasRole("SUPERU")
+                        .antMatchers("/superuProfile").hasRole("SUPERU")
+                        .anyRequest().authenticated())
                 //use HttpBasic authentication for /update-user, withDefaults() allows you to chain the next method
                 .httpBasic(Customizer.withDefaults())
                 //use a form to log in with the default login page

@@ -29,12 +29,6 @@ public class HomeController {
     }
 
 
-    @GetMapping("/superuDashboard")
-    @PreAuthorize("hasRole('SUPERU')")
-    public String superuDashboard() {
-        return "authorization/superuDashboard";
-    }
-
     @GetMapping("/superuSettings")
     @PreAuthorize("hasRole('SUPERU')")
     public String superuSettings() {
@@ -47,6 +41,11 @@ public class HomeController {
         return "authorization/superuProfile";
     }
 
+    @GetMapping("/superuDashboard")
+    @PreAuthorize("hasRole('SUPERU')")
+    public String superuDashboard() {
+        return "authorization/superuProfile";
+    }
 
     /*
         Method Security Annotations
