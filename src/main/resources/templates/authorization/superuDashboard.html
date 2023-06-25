@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{authorization/fragments/layout}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>Superuser Dashboard</title>
 </head>
 <body>
-<div layout:fragment="content" th:remove="tag">
-  <h1>Superuser Dashboard Page</h1>
-  <p>This page is only accessible to (and able to be seen by) super users. Welcome to your dashboard!</p>
-</div>
+<h1>Welcome to your Dashboard, Superuser</h1>
+
+<h2>Your Posts</h2>
+<ul>
+  <li th:each="post : ${posts}">
+    <h3 th:text="${post.title}"></h3>
+    <p th:text="${post.content}"></p>
+  </li>
+</ul>
 </body>
 </html>
