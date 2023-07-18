@@ -7,10 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import platform.codingnomads.co.springsecurity.authorization.addingauthorization.models.Post;
 import platform.codingnomads.co.springsecurity.authorization.addingauthorization.repositories.UserPrincipalRepo;
 import platform.codingnomads.co.springsecurity.authorization.addingauthorization.services.CustomUserService;
-import platform.codingnomads.co.springsecurity.authorization.addingauthorization.services.PostService;
+
 
 import javax.annotation.security.RolesAllowed;
 import java.util.ArrayList;
@@ -22,8 +21,6 @@ public class HomeController {
     @Autowired
     private CustomUserService customUserService;
 
-    @Autowired
-    PostService postService;
     @GetMapping("/")
     public String homePage() {
         return "authorization/home";
@@ -40,9 +37,8 @@ public class HomeController {
     }
 
     @GetMapping("/mas")
-    @PreAuthorize("#id != 1")
     public String testMas(int id){
-        return "authorization/home";
+        return "authorization/mas";
     }
 
 
@@ -65,19 +61,7 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/createPosts")
-    public String createPosts(Model model){
-        List<Post> posts = new ArrayList<>();
-        postService.createPosts(posts);
-        return "postCreated.html";
-    }
 
-    @RequestMapping("/viewPosts")
-    public String viewPosts(Model model){
-        List<Post> posts = postService.getPostsByCurrentUser();
-        model.addAttribute("posts", posts);
-        return "userPosts.html";
-    }
     /*
         Method Security Annotations
 
